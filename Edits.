@@ -1,0 +1,33 @@
+hotdog_data = []
+with open ('Hotdog.txt',  'r') as file:
+    for line in file:
+         items = line.strip().split(', ')
+         
+    hotdog_data.append(items)
+
+for i in (hotdog_data):
+     print (i)
+
+print(hotdog_data[0])
+
+
+
+def load_data(filename):
+     data = []
+
+     file = open(filename, "r")
+     lines = file.readlines()
+     file.close()
+
+     for line in lines:
+          parts = line.strip().split(",")
+
+          row = [
+               parts[0],
+               parts[1],
+               int(parts[3]),
+               int(parts[4]),
+               float(parts[5]),
+               float(parts[6]),
+          ]
+          data.append(row)
