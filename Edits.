@@ -31,3 +31,12 @@ def load_data(filename):
                float(parts[6]),
           ]
           data.append(row)
+
+#LINEAR SEARCHING THROUGH UNSORTED DATA
+
+def linear_search_unsorted(data,targetVal):
+     #Searching through unsorted dataset
+     for row in data :
+          if row[1].lower() == targetVal.lower():
+               return row
+     return None 
