@@ -11,7 +11,7 @@ for i in (hotdog_data):
 print(hotdog_data[0])
 
 
-
+#Reading in the vendor data from the text file
 def load_data(filename):
      data = []
 
