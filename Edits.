@@ -1,3 +1,5 @@
+import time
+
 hotdog_data = []
 with open ('Hotdog.txt',  'r') as file:
     for line in file:
@@ -11,7 +13,7 @@ for i in (hotdog_data):
 print(hotdog_data[0])
 
 
-#Reading in the vendor data from the text file
+#READING IN THE VENDOR DATA FILE INTO PYTHON
 def load_data(filename):
      data = []
 
@@ -40,3 +42,14 @@ def linear_search_unsorted(data,targetVal):
           if row[1].lower() == targetVal.lower():
                return row
      return None 
+
+# LINEAR SEARCH THROUFH SORTED DATA
+
+def linear_search_sorted(data,targetVal):
+     #Now searching through the sorted data
+     for row in data:
+           if row[1].lower() == targetVal.lower():
+                return row
+           elif row[1].lower() > targetVal:
+                break
+     return None  
