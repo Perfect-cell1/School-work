@@ -56,16 +56,18 @@ def linear_search_sorted(data,targetVal):
 
 # SEARCH THE DATA USING A BINARY SEARCH
 
-def binary_search(data,targetVal):
-     low = 0
+
+def binary_search(data,targetVal): #Initialises the high and low boundaries
+     low = 0  
      high = len(data) - 1
 
-     while low<= high:
-          mid = (low + high) // 2
-          if data[mid][1].lower() == targetVal.lower():
-               return data[mid]
-          elif data[mid][1].lower() < targetVal.lower():
-               low = mid + 1
-               high = mid - 1
+     while low<= high: # Continues searching as long as the searching has one element
+          mid = (low + high) // 2  # Formula to find the middle index of the array
+          if data[mid][1].lower() == targetVal.lower(): # Checks if the searching element is equal to the target value
+               return data[mid] # Returns the value if the conclusion is true
+          elif data[mid][1].lower() < targetVal.lower(): 
+               low = mid + 1 # However if the middle value is lower than the target value discard the left
+               high = mid - 1 # However if the middle is higher than the the target discard the right
 
      return None
+
