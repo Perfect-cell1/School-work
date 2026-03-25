@@ -53,3 +53,19 @@ def linear_search_sorted(data,targetVal):
            elif row[1].lower() > targetVal:
                 break
      return None  
+
+# SEARCH THE DATA USING A BINARY SEARCH
+
+def binary_search(data,targetVal):
+     low = 0
+     high = len(data) - 1
+
+     while low<= high:
+          mid = (low + high) // 2
+          if data[mid][1].lower() == targetVal.lower():
+               return data[mid]
+          elif data[mid][1].lower() < targetVal.lower():
+               low = mid + 1
+               high = mid - 1
+
+     return None
