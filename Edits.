@@ -71,3 +71,15 @@ def binary_search(data,targetVal): #Initialises the high and low boundaries
 
      return None
 
+
+# SEARCH THE DATA USING BUBBLE SORT
+
+def bubble_sort(data):  #To start a function
+     arr = data.copy()  #Creates a seperate copy to save the data
+     n = len(arr)       #To count the numbers we have
+
+     for i in range(n): # To keep repeating the step
+          for j in range(0, n-i-1): #Checks the numbers in the wrong order
+               if arr[j][1] > arr[j+1][1]: #If the left number is bigger it needs to be stopped
+                    arr[j], arr[j+1] = arr[j+1], arr[j] # Swaps the numbers so the bigger one goes on the right
+     return arr
