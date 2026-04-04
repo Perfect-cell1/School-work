@@ -83,3 +83,13 @@ def bubble_sort(data):  #To start a function
                if arr[j][1] > arr[j+1][1]: #If the left number is bigger it needs to be stopped
                     arr[j], arr[j+1] = arr[j+1], arr[j] # Swaps the numbers so the bigger one goes on the right
      return arr
+
+#SORT THE DATA USING QUICK SORT
+
+def quick_sort(data):  #To define a function
+     if len(data) <=1: #If the data is less than one
+          return data  #Return the data
+     pivot = data[0]   #Used to sort the array
+     left = [ x for x in data[1:] if ["id"] <= pivot["id"]] #if the left value[id] is smaller than the pivot it puts the value on the left side of the pivot
+     right = [ x for x in data[1:] if ["id"] >= pivot["id"]] #And if the right value[id] is bigger than the pivot it'll put the value on the right side of it
+     return quick_sort(left) + [pivot] + quick_sort(right) #It does the same thing and repeats the steps until it's sorted in ascended order
