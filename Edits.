@@ -93,3 +93,34 @@ def quick_sort(data):  #To define a function
      left = [ x for x in data[1:] if ["id"] <= pivot["id"]] #if the left value[id] is smaller than the pivot it puts the value on the left side of the pivot
      right = [ x for x in data[1:] if ["id"] >= pivot["id"]] #And if the right value[id] is bigger than the pivot it'll put the value on the right side of it
      return quick_sort(left) + [pivot] + quick_sort(right) #It does the same thing and repeats the steps until it's sorted in ascended order
+
+
+#TIMING FUNCTIONS
+
+def time_searches(data, target):
+     sorted_data = quick_sort(data)
+
+     start = time.time()
+     linear_search_unsorted(data, target)
+     t1 = time.time() - start
+
+     start = time.time()
+     linear_search_unsorted(data,target)
+     t2 = time.time() - start
+
+     start = time.time()
+     binary_search(data,target)
+     t3 = time.time() - start
+
+     return t1,t2,t3
+
+def time_sort(data):
+     start = time.time()
+     bubble_sort(data)
+     t1 = time.time() - start
+
+     start = time.time()
+     quick_sort(data)
+     t2 = time.time() - start
+
+     return t1, t2
