@@ -124,3 +124,26 @@ def time_sort(data):
      t2 = time.time() - start
 
      return t1, t2
+#ANALYSIS
+
+def analyse_data(data):
+     vendor_total = {}
+     vegan_total = 0
+     meat_total = 0
+     least_ketchup = float("inf")
+     least_vendor = ""
+
+     for row in data:
+          name = row[1]
+
+          if name not in vendor_total:
+               vendor_total[name] = 0
+          
+          vendor_total[name] += row[3] + row[4]
+
+          vegan_total += row[4]
+          meat_total += row[4]
+
+          if row[6] < least_ketchup:
+               least_ketchup = row[6]
+               least_vendor = name
