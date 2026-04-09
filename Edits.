@@ -127,23 +127,35 @@ def time_sort(data):
 #ANALYSIS
 
 def analyse_data(data):
-     vendor_total = {}
-     vegan_total = 0
-     meat_total = 0
-     least_ketchup = float("inf")
-     least_vendor = ""
+    vendor_totals = {}
+    vegan_total = 0
+    meat_total = 0
+    least_ketchup_vendor = None
+    least_ketchup = float('inf')
 
-     for row in data:
-          name = row[1]
+    for item in data:
+        name = item["name"]
 
-          if name not in vendor_total:
-               vendor_total[name] = 0
-          
-          vendor_total[name] += row[3] + row[4]
+        # Total per vendor
+        if name not in vendor_totals:
+            vendor_totals[name] = 0
 
-          vegan_total += row[4]
-          meat_total += row[4]
+        vendor_totals[name] += item["vegan"] + item["meat"]
 
-          if row[6] < least_ketchup:
-               least_ketchup = row[6]
-               least_vendor = name
+        vegan_total += item["vegan"]
+        meat_total += item["meat"]
+
+        if item["ketchup"] < least_ketchup:
+            least_ketchup = item["ketchup"]
+            least_ketchup_vendor = name
+
+    # Most productive vendor
+    most_productive = max(vendor_totals, key=vendor_totals.get)
+
+    return {
+        "most_productive": most_productive,
+        "vegan_total": vegan_total,
+        "meat_total": meat_total,
+        "least_ketchup_vendor": least_ketchup_vendor
+    }
+
