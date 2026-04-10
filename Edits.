@@ -159,3 +159,48 @@ def analyse_data(data):
         "least_ketchup_vendor": least_ketchup_vendor
     }
 
+
+# SAVE ANALYSIS TO FILE
+
+def save_analysis(results, filename="analysis.txt"):
+    with open(filename, "w") as file:
+        file.write("HOTDOG DATA ANALYSIS\n")
+        file.write("====================\n")
+        file.write(f"Most productive vendor: {results['most_productive']}\n")
+        file.write(f"Total vegan hotdogs: {results['vegan_total']}\n")
+        file.write(f"Total meat hotdogs: {results['meat_total']}\n")
+        file.write(f"Least ketchup used by: {results['least_ketchup_vendor']}\n")
+
+
+def main():
+    data = load_data("Hotdogs.txt")
+
+    target = input("Enter vendor ID to search: ")
+
+    # SEARCH TIMINGS
+    t1, t2, t3 = time_searches(data, target)
+
+    print("\nSearch Times:")
+    print(f"Linear (unsorted): {t1}")
+    print(f"Linear (sorted): {t2}")
+    print(f"Binary: {t3}")
+
+    # SORT TIMINGS
+    t1, t2 = time_sorts(data)
+
+    print("\nSort Times:")
+    print(f"Bubble sort: {s1}")
+    print(f"Quick sort: {s2}")
+
+    # ANALYSIS
+    results = analyse_data(data)
+
+    print("\nAnalysis:")
+    print(results)
+
+    save_analysis(results)
+
+
+# RUN PROGRAM
+main()
+
