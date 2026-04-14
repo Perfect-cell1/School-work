@@ -15,24 +15,30 @@ print(hotdog_data[0])
 
 #READING IN THE VENDOR DATA FILE INTO PYTHON
 def load_data(filename):
-     data = []
+    data = []
+    try:
+        with open(filename, "r") as file:
+            for line in file:
+                row = line.strip().split(",")
+                if len(row) != 7:
+                    continue
+           
+                record = {
+                     "id": row[0],
+                     "name": row[1],
+                     "week": int(row[2]),
+                     "vegan": int(row[3]),
+                     "meat": int(row[4]),
+                     "onions": float(row[5]),
+                     "ketchup": float(row[6])
+                  }
+        data.append(record)
+    except FileNotFoundError:
+        print("Error: File not found.")
+    except ValueError:
+        print("Error: Data format issue in file")
+    return data
 
-     file = open(filename, "r")
-     lines = file.readlines()
-     file.close()
-
-     for line in lines:
-          parts = line.strip().split(",")
-
-          row = [
-               parts[0],
-               parts[1],
-               int(parts[3]),
-               int(parts[4]),
-               float(parts[5]),
-               float(parts[6]),
-          ]
-          data.append(row)
 
 #LINEAR SEARCHING THROUGH UNSORTED DATA
 
