@@ -36,40 +36,47 @@ def load_data(filename):
 
 #LINEAR SEARCHING THROUGH UNSORTED DATA
 
-def linear_search_unsorted(data,targetVal):
-     #Searching through unsorted dataset
-     for row in data :
-          if row[1].lower() == targetVal.lower():
-               return row
-     return None 
+def linear_search_sorted(data, target):
+    for item in data:
+        if item["id"] == target:
+            return item
+        elif item["id"] > target:
+            break
+    return None
 
 # LINEAR SEARCH THROUFH SORTED DATA
 
-def linear_search_sorted(data,targetVal):
-     #Now searching through the sorted data
-     for row in data:
-           if row[1].lower() == targetVal.lower():
-                return row
-           elif row[1].lower() > targetVal:
-                break
-     return None  
+def linear_search_sorted(data, target):
+    for item in data:
+        if item["id"] == target:
+            return item
+        elif item["id"] > target:
+            break
+    return None
+
 
 # SEARCH THE DATA USING A BINARY SEARCH
 
+def binary_search(data, target):  
+    low = 0
+    high = len(data) - 1
 
-def binary_search(data,targetVal): #Initialises the high and low boundaries
-     low = 0  
-     high = len(data) - 1
 
-     while low<= high: # Continues searching as long as the searching has one element
-          mid = (low + high) // 2  # Formula to find the middle index of the array
-          if data[mid][1].lower() == targetVal.lower(): # Checks if the searching element is equal to the target value
-               return data[mid] # Returns the value if the conclusion is true
-          elif data[mid][1].lower() < targetVal.lower(): 
-               low = mid + 1 # However if the middle value is lower than the target value discard the left
-               high = mid - 1 # However if the middle is higher than the the target discard the right
+    while low <= high:
+        mid = (low + high) // 2
 
-     return None
+
+        if data[mid]["id"] == target:
+            return data[mid]
+        elif data[mid]["id"] < target:
+            low = mid + 1
+        else:
+            high = mid - 1
+
+
+    return None
+
+
 
 
 # SEARCH THE DATA USING BUBBLE SORT
