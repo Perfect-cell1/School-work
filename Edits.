@@ -63,24 +63,21 @@ def linear_search_sorted(data, target):
 
 # SEARCH THE DATA USING A BINARY SEARCH
 
-def binary_search(data, target):  
+def binary_search(data, target): #Initialises the boundaries
     low = 0
     high = len(data) - 1
 
 
-    while low <= high:
-        mid = (low + high) // 2
+    while low <= high: #Continues searching as long as there's an element
+        mid = (low + high) // 2 #The formula utilised for it
 
 
-        if data[mid]["id"] == target:
+        if data[mid]["id"] == target: #Check if the searching element is equal to the target
             return data[mid]
-        elif data[mid]["id"] < target:
-            low = mid + 1
+        elif data[mid]["id"] < target: 
+            low = mid + 1 #If middle is lower than target discard left
         else:
-            high = mid - 1
-
-
-    return None
+            high = mid - 1 #If middle is higher than target discard right
 
 
 
