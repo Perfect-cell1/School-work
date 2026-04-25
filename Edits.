@@ -172,6 +172,23 @@ def analyse_data(data):
         "least_ketchup_vendor": least_ketchup_vendor
     }
 
+#SEARCH INPUT
+while True:
+    search_id = input("Enter Vendor ID to search: ").strip()
+    
+    # Check if the entered ID exists in any dictionary within the list
+    vendor_found = False
+    for vendor in hotdog_data:
+        if vendor['id'] == search_id:
+            print(f"Success! Found vendor: {vendor['name']}")
+            vendor_found = True
+            break
+    
+    if vendor_found:
+        break  # Exit the loop and continue with the analysis
+    else:
+        print(f"Error: Vendor ID '{search_id}' not found. Please try again.")
+
 
 # SAVE ANALYSIS TO FILE
 
