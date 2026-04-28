@@ -71,13 +71,23 @@ def binary_search(data, target): #Initialises the boundaries
     while low <= high: #Continues searching as long as there's an element
         mid = (low + high) // 2 #The formula utilised for it
 
+        try:
+            while low <= high: #Continues searching as long as there's an element
+                mid = (low + high) // 2 #The formula utilised for it
 
-        if data[mid]["id"] == target: #Check if the searching element is equal to the target
-            return data[mid]
-        elif data[mid]["id"] < target: 
-            low = mid + 1 #If middle is lower than target discard left
-        else:
-            high = mid - 1 #If middle is higher than target discard right
+
+                if data[mid]["id"] == target: #Check if the searching element is equal to the target
+                   return data[mid]
+                elif data[mid]["id"] < target: 
+                    low = mid + 1 #If middle is lower than target discard left
+                else:
+                    high = mid - 1 #If middle is higher than target discard right
+
+        except (KeyError,  TypeError):
+            print(f"Warning: Skipping malformed entry at index {mid}")
+
+            return None
+
 
 
 
