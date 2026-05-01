@@ -215,11 +215,7 @@ def analyse_data(data):
         "least_ketchup_vendor": least_ketchup_vendor
     }
 
-#SEARCH INPUT
 
-valid_names = sorted(set(v["name"] for v in vendors))
-while True:
-                        
 
 # =========================
 # SAVE ANALYSIS TO FILE
@@ -243,7 +239,29 @@ def save_analysis(results, filename="analysis.txt"):
 def main():
     data = load_data("Hotdogs.txt")
 
-    target = input("Enter Vendor ID: ")
+    if not data:
+        print("No data loaded. Please check the file path.")
+        return
+
+    # ############################################################
+    # SEARCH INPUT VALIDATION
+    # ############################################################
+    
+    # Create a unique list of vendor names for validation
+    name_to_id = {item["name"]: item["id"] for item in data}
+    
+    while True:
+        target = input("Enter the Vendor Name to search: ").strip()
+
+        # Validation: Check if the input name exists in our records
+        if target in name_to_id:
+            target_id = name_to_id[target]
+            print(f"--- Valid Vendor Selected: {target} (ID: {target_id}) ---")
+            break
+        else:
+            # Error message if the name is not found
+            print(f"Error: '{target}' is not in our records. Please try again.")
+  
 
     # SEARCH TIMINGS
     t1, t2, t3 = time_searches(data, target)
