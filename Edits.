@@ -211,11 +211,33 @@ def save_analysis(results, filename="analysis.txt"):
         file.write(f"Total meat hotdogs: {results['meat_total']}\n")
         file.write(f"Least ketchup used by: {results['least_ketchup_vendor']}\n")
 
-
+# MAIN PROGRAM
 def main():
     data = load_data("Hotdogs.txt")
 
-    target = input("Enter vendor ID to search: ")
+    if not data:
+        print("No data loaded. Please check the file path.")
+        return
+
+    # ############################################################
+    # SEARCH INPUT VALIDATION
+    # ############################################################
+    
+    # Create a unique list of vendor names for validation
+    name_to_id = {item["name"]: item["id"] for item in data}
+    
+    while True:
+        target = input("Enter the Vendor Name to search: ").strip()
+
+        # Validation: Check if the input name exists in our records
+        if target in name_to_id:
+            target_id = name_to_id[target]
+            print(f"--- Valid Vendor Selected: {target} (ID: {target_id}) ---")
+            break
+        else:
+            # Error message if the name is not found
+            print(f"Error: '{target}' is not in our records. Please try again.")
+  
 
     # SEARCH TIMINGS
     t1, t2, t3 = time_searches(data, target)
@@ -229,8 +251,8 @@ def main():
     t1, t2 = time_sorts(data)
 
     print("\nSort Times:")
-    print(f"Bubble sort: {s1}")
-    print(f"Quick sort: {s2}")
+    print(f"Bubble sort: {t1}")
+    print(f"Quick sort: {t2}")
 
     # ANALYSIS
     results = analyse_data(data)
@@ -243,4 +265,3 @@ def main():
 
 # RUN PROGRAM
 main()
-
