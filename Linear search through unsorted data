@@ -1,0 +1,5 @@
+def linear_search(data, target):
+    for item in data:
+        if item["id"] == target:
+            return item
+    return None
