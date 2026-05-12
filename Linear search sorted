@@ -1,0 +1,7 @@
+def linear_search_sorted(data, target):
+    for item in data:
+        if item["id"] == target:
+            return item
+        elif item["id"] > target:
+            break
+    return None
