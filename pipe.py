@@ -6,30 +6,73 @@ import time
 # =========================
 def load_data(filename):
     data = []
-    #data validation9
     try:
         with open(filename, "r") as file:
             for line in file:
                 row = line.strip().split(",")
                 if len(row) != 7:
                     continue
+                
                 try:
+                    
+                    v_id = row[0]
+                    v_name = row[1]
+                    year_week = row[2]
+                    vegan = int(row[3])
+                    meat = int(row[4])
+                    onions = float(row[5])
+                    ketchup = int(row[6]) 
+
+                    # --- SIMPLE VALIDATION LOGIC ---
+
+                    # 1. Vendor ID: 2 letters, underscore, 3 digits, all caps
+                    if not re.match(r"^[A-Z]{2}_[0-9]{3}$", v_id):
+                        continue
+
+                    # 2. Vendor Name: Length 2 to 25
+                    if not (2 <= len(v_name) <= 25):
+                        continue
+
+                    # 3. Year and Week: YYYYWW and WW between 1-52
+                    if len(year_week) != 6:
+                        continue
+                    week_num = int(year_week[4:])
+                    if not (1 <= week_num <= 52):
+                        continue
+
+                    # 4. Hotdogs: Divisible by 10
+                    if vegan % 10 != 0 or meat % 10 != 0:
+                        continue
+
+                    # 5. Onions: Half kilogram increments (e.g., 0.5, 1.0, 1.5)
+                    # We check if doubling it results in a whole number
+                    if (onions * 2) % 1 != 0:
+                        continue
+
+                    # 6. Ketchup: Integer between 1 and 4
+                    if not (1 <= ketchup <= 4):
+                        continue
+
+                    # If it passed everything, add to data
                     record = {
-                        "id": row[0],
-                        "name": row[1],
-                        "week": int(row[2]),
-                        "vegan": int(row[3]),
-                        "meat": int(row[4]),
-                        "onions": float(row[5]),
-                        "ketchup": float(row[6])
+                        "id": v_id,
+                        "name": v_name,
+                        "week": int(year_week),
+                        "vegan": vegan,
+                        "meat": meat,
+                        "onions": onions,
+                        "ketchup": ketchup
                     }
+                    data.append(record)
+
                 except ValueError:
-                    # skip rows with invalid numeric fields
                     continue
-                data.append(record)
+                    
     except FileNotFoundError:
         print("Error: File not found.")
+    
     return data
+
 
 
 
